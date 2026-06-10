@@ -18,18 +18,32 @@ function TrashIcon() {
   )
 }
 
+const ORDENACOES = [
+  { key: 'data',        label: 'Data' },
+  { key: 'paciente',    label: 'Paciente' },
+  { key: 'profissional',label: 'Profissional' },
+]
+
+function aplicarOrdem(lista, ordem) {
+  return [...lista].sort((a, b) => {
+    if (ordem === 'paciente')
+      return (a.paciente?.nome || '').localeCompare(b.paciente?.nome || '')
+    if (ordem === 'profissional')
+      return (a.profissional?.nome || '').localeCompare(b.profissional?.nome || '')
+    return new Date(b.data) - new Date(a.data)
+  })
+}
+
 export default function AtendimentoList() {
   const [atendimentos, setAtendimentos] = useState([])
+  const [ordem, setOrdem] = useState('data')
   const [selecionado, setSelecionado] = useState(null)
   const [exames, setExames] = useState([])
   const [adicionandoExame, setAdicionandoExame] = useState(false)
   const [novoExame, setNovoExame] = useState('')
 
   useEffect(() => {
-    atendimentoService.listar().then(res => {
-      const ordenados = [...res.data].sort((a, b) => new Date(b.data) - new Date(a.data))
-      setAtendimentos(ordenados)
-    })
+    atendimentoService.listar().then(res => setAtendimentos(res.data))
   }, [])
 
   useEffect(() => {
@@ -84,6 +98,19 @@ export default function AtendimentoList() {
         </Link>
       </div>
 
+      <div className="d-flex align-items-center gap-2 mb-3">
+        <span className="text-muted small">Ordenar por:</span>
+        {ORDENACOES.map(o => (
+          <button
+            key={o.key}
+            className={`btn btn-sm ${ordem === o.key ? 'btn-secondary' : 'btn-outline-secondary'}`}
+            onClick={() => setOrdem(o.key)}
+          >
+            {o.label}
+          </button>
+        ))}
+      </div>
+
       <div className="row g-3 align-items-start">
         <div className={selecionado ? 'col-md-7' : 'col-12'}>
           <div className="card shadow-sm">
@@ -106,7 +133,7 @@ export default function AtendimentoList() {
                       </td>
                     </tr>
                   )}
-                  {atendimentos.map(a => (
+                  {aplicarOrdem(atendimentos, ordem).map(a => (
                     <tr
                       key={a.id}
                       onClick={() => selecionar(a)}
