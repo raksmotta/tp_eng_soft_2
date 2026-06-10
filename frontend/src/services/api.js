@@ -12,6 +12,15 @@ export const profissionalService = {
   excluir: (id) => api.delete(`/profissionais/${id}`),
 }
 
+export const pacienteService = {
+  listar: () => api.get('/pacientes'),
+  buscarPorId: (id) => api.get(`/pacientes/${id}`),
+  buscarPorNome: (nome) => api.get(`/pacientes/buscar?nome=${nome}`),
+  inserir: (dados) => api.post('/pacientes', dados),
+  alterar: (id, dados) => api.put(`/pacientes/${id}`, dados),
+  excluir: (id) => api.delete(`/pacientes/${id}`),
+}
+
 export const atendimentoService = {
   listar: () => api.get('/atendimentos'),
   buscarPorId: (id) => api.get(`/atendimentos/${id}`),

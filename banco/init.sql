@@ -4,6 +4,14 @@
 CREATE DATABASE saude_db;
 \c saude_db
 
+CREATE TABLE paciente (
+    id               SERIAL PRIMARY KEY,
+    nome             VARCHAR(255) NOT NULL,
+    cpf              VARCHAR(14),
+    data_nascimento  DATE,
+    telefone         VARCHAR(20)
+);
+
 CREATE TABLE profissional_de_saude (
     id        SERIAL PRIMARY KEY,
     nome      VARCHAR(255) NOT NULL,
@@ -21,7 +29,9 @@ CREATE TABLE atendimento (
     receita_saude    VARCHAR(20) NOT NULL
         CHECK (receita_saude IN ('REMEDIO', 'ATIVIDADE_FISICA', 'ATIVIDADE_MENTAL')),
     profissional_id  INTEGER     NOT NULL
-        REFERENCES profissional_de_saude(id)
+        REFERENCES profissional_de_saude(id),
+    paciente_id      INTEGER
+        REFERENCES paciente(id)
 );
 
 CREATE TABLE exame_lab (

@@ -8,8 +8,12 @@ com\saude\service\ExameLabService.class
 com\saude\model\ProfissionalDeSaude.class
 com\saude\service\AtendimentoService.class
 com\saude\model\ExameLab.class
+com\saude\model\Paciente.class
 com\saude\model\TipoReceita.class
 com\saude\repository\AtendimentoRepository.class
 com\saude\controller\AtendimentoController.class
+com\saude\controller\PacienteController.class
+com\saude\repository\PacienteRepository.class
+com\saude\service\PacienteService.class
 com\saude\SaudeApplication.class
 com\saude\repository\ProfissionalRepository.class

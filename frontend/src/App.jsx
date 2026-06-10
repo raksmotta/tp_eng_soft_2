@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route, Link, NavLink } from 'react-router-dom'
 import ProfissionalList from './components/Profissional/ProfissionalList'
 import ProfissionalForm from './components/Profissional/ProfissionalForm'
+import PacienteList from './components/Paciente/PacienteList'
+import PacienteForm from './components/Paciente/PacienteForm'
 import AtendimentoList from './components/Atendimento/AtendimentoList'
 import AtendimentoForm from './components/Atendimento/AtendimentoForm'
 import ExameLabList from './components/ExameLab/ExameLabList'
@@ -14,6 +16,14 @@ export default function App() {
           Saúde
         </Link>
         <ul className="navbar-nav gap-2">
+          <li className="nav-item">
+            <NavLink
+              className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}
+              to="/pacientes"
+            >
+              Pacientes
+            </NavLink>
+          </li>
           <li className="nav-item">
             <NavLink
               className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}
@@ -35,6 +45,9 @@ export default function App() {
 
       <div className="container py-4">
         <Routes>
+          <Route path="/pacientes" element={<PacienteList />} />
+          <Route path="/pacientes/novo" element={<PacienteForm />} />
+          <Route path="/pacientes/:id/editar" element={<PacienteForm />} />
           <Route path="/profissionais" element={<ProfissionalList />} />
           <Route path="/profissionais/novo" element={<ProfissionalForm />} />
           <Route path="/profissionais/:id/editar" element={<ProfissionalForm />} />

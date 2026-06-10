@@ -150,6 +150,9 @@ export default function AtendimentoList() {
                   <dt className="col-5 text-muted">Horário</dt>
                   <dd className="col-7">{selecionado.horario || '—'}</dd>
 
+                  <dt className="col-5 text-muted">Paciente</dt>
+                  <dd className="col-7">{selecionado.paciente?.nome || '—'}</dd>
+
                   <dt className="col-5 text-muted">Profissional</dt>
                   <dd className="col-7">{selecionado.profissional?.nome || '—'}</dd>
 

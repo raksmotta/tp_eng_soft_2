@@ -9,5 +9,6 @@ import java.util.List;
 public interface AtendimentoRepository extends JpaRepository<Atendimento, Integer> {
     List<Atendimento> findByData(LocalDate data);
     List<Atendimento> findByProfissionalId(Integer profissionalId);
+    List<Atendimento> findByPacienteId(Integer pacienteId);
     List<Atendimento> findByReceitaSaude(TipoReceita receita);
 }

@@ -1,11 +1,15 @@
 C:\Users\raque\Documents\engsoft2trabalho\backend\src\main\java\com\saude\model\ExameLab.java
 C:\Users\raque\Documents\engsoft2trabalho\backend\src\main\java\com\saude\controller\ExameLabController.java
+C:\Users\raque\Documents\engsoft2trabalho\backend\src\main\java\com\saude\repository\PacienteRepository.java
 C:\Users\raque\Documents\engsoft2trabalho\backend\src\main\java\com\saude\service\AtendimentoService.java
+C:\Users\raque\Documents\engsoft2trabalho\backend\src\main\java\com\saude\controller\PacienteController.java
 C:\Users\raque\Documents\engsoft2trabalho\backend\src\main\java\com\saude\model\Atendimento.java
 C:\Users\raque\Documents\engsoft2trabalho\backend\src\main\java\com\saude\repository\ExameLabRepository.java
+C:\Users\raque\Documents\engsoft2trabalho\backend\src\main\java\com\saude\service\PacienteService.java
 C:\Users\raque\Documents\engsoft2trabalho\backend\src\main\java\com\saude\service\ExameLabService.java
 C:\Users\raque\Documents\engsoft2trabalho\backend\src\main\java\com\saude\controller\ProfissionalController.java
 C:\Users\raque\Documents\engsoft2trabalho\backend\src\main\java\com\saude\repository\ProfissionalRepository.java
+C:\Users\raque\Documents\engsoft2trabalho\backend\src\main\java\com\saude\model\Paciente.java
 C:\Users\raque\Documents\engsoft2trabalho\backend\src\main\java\com\saude\model\TipoReceita.java
 C:\Users\raque\Documents\engsoft2trabalho\backend\src\main\java\com\saude\repository\AtendimentoRepository.java
 C:\Users\raque\Documents\engsoft2trabalho\backend\src\main\java\com\saude\controller\AtendimentoController.java

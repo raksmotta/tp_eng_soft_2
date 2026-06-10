@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { atendimentoService, profissionalService } from '../../services/api'
+import { atendimentoService, profissionalService, pacienteService } from '../../services/api'
 
 const RECEITAS = ['REMEDIO', 'ATIVIDADE_FISICA', 'ATIVIDADE_MENTAL']
 
@@ -8,13 +8,15 @@ export default function AtendimentoForm() {
   const { id } = useParams()
   const navigate = useNavigate()
   const [profissionais, setProfissionais] = useState([])
+  const [pacientes, setPacientes] = useState([])
   const [form, setForm] = useState({
     data: '', horario: '', problemaTexto: '', receitaSaude: '',
-    profissional: { id: '' }
+    profissional: { id: '' }, paciente: { id: '' }
   })
 
   useEffect(() => {
     profissionalService.listar().then(res => setProfissionais(res.data))
+    pacienteService.listar().then(res => setPacientes(res.data))
     if (id) atendimentoService.buscarPorId(id).then(res => setForm(res.data))
   }, [id])
 
@@ -54,6 +56,21 @@ export default function AtendimentoForm() {
                     required
                   />
                 </div>
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label">Paciente *</label>
+                <select
+                  className="form-select"
+                  value={form.paciente?.id || ''}
+                  onChange={e => setForm({ ...form, paciente: { id: e.target.value } })}
+                  required
+                >
+                  <option value="">Selecione...</option>
+                  {pacientes.map(p => (
+                    <option key={p.id} value={p.id}>{p.nome}</option>
+                  ))}
+                </select>
               </div>
 
               <div className="mb-3">

@@ -28,6 +28,7 @@ public class AtendimentoService {
             a.setProblemaTexto(dados.getProblemaTexto());
             a.setReceitaSaude(dados.getReceitaSaude());
             a.setProfissional(dados.getProfissional());
+            a.setPaciente(dados.getPaciente());
             return repository.save(a);
         });
     }
@@ -42,6 +43,10 @@ public class AtendimentoService {
 
     public List<Atendimento> consultarPorProfissional(Integer profissionalId) {
         return repository.findByProfissionalId(profissionalId);
+    }
+
+    public List<Atendimento> consultarPorPaciente(Integer pacienteId) {
+        return repository.findByPacienteId(pacienteId);
     }
 
     public List<Atendimento> consultarPorReceita(TipoReceita receita) {

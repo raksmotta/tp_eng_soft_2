@@ -41,6 +41,11 @@ public class AtendimentoController {
         return service.consultarPorProfissional(profissionalId);
     }
 
+    @GetMapping("/paciente/{pacienteId}")
+    public List<Atendimento> buscarPorPaciente(@PathVariable Integer pacienteId) {
+        return service.consultarPorPaciente(pacienteId);
+    }
+
     @GetMapping("/receita/{receita}")
     public List<Atendimento> buscarPorReceita(@PathVariable TipoReceita receita) {
         return service.consultarPorReceita(receita);

@@ -23,6 +23,10 @@ public class Atendimento {
     @JoinColumn(name = "profissional_id")
     private ProfissionalDeSaude profissional;
 
+    @ManyToOne
+    @JoinColumn(name = "paciente_id")
+    private Paciente paciente;
+
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
     public LocalDate getData() { return data; }
@@ -35,4 +39,6 @@ public class Atendimento {
     public void setReceitaSaude(TipoReceita receitaSaude) { this.receitaSaude = receitaSaude; }
     public ProfissionalDeSaude getProfissional() { return profissional; }
     public void setProfissional(ProfissionalDeSaude profissional) { this.profissional = profissional; }
+    public Paciente getPaciente() { return paciente; }
+    public void setPaciente(Paciente paciente) { this.paciente = paciente; }
 }

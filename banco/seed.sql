@@ -1,3 +1,14 @@
+-- Pacientes
+INSERT INTO paciente (nome, cpf, data_nascimento, telefone) VALUES
+('João Carlos Silva',       '123.456.789-00', '1985-03-15', '(11) 99111-2222'),
+('Maria Fernanda Santos',   '234.567.890-11', '1990-07-22', '(21) 99222-3333'),
+('Pedro Henrique Oliveira', '345.678.901-22', '1978-11-08', '(31) 99333-4444'),
+('Ana Beatriz Costa',       '456.789.012-33', '1995-04-30', '(41) 99444-5555'),
+('Beatriz Nascimento Lima', '567.890.123-44', '1982-09-14', '(51) 99555-6666'),
+('Rafael Eduardo Souza',    '678.901.234-55', '1988-01-27', '(61) 99666-7777'),
+('Larissa Cristina Ferreira','789.012.345-66','1993-06-03', '(71) 99777-8888'),
+('Marcos Antônio Alves',    '890.123.456-77', '1975-12-19', '(85) 99888-9999');
+
 -- Profissionais de Saúde
 INSERT INTO profissional_de_saude (nome, telefone, endereco, categoria) VALUES
 ('Ana Paula Ferreira',   '(11) 98765-4321', 'Rua das Flores, 123 - São Paulo',         'MEDICO'),
@@ -12,22 +23,22 @@ INSERT INTO profissional_de_saude (nome, telefone, endereco, categoria) VALUES
 ('Diego Nascimento',     '(92) 89876-5432', 'Rua Recife, 707 - Manaus',                'FISIOTERAPEUTA');
 
 -- Atendimentos
-INSERT INTO atendimento (data, horario, problema_texto, receita_saude, profissional_id) VALUES
-('2025-01-10', '09:00', 'Dor de cabeça frequente e tontura ao se levantar',         'REMEDIO',          1),
-('2025-01-15', '10:30', 'Ansiedade generalizada e dificuldade para dormir',          'ATIVIDADE_MENTAL', 5),
-('2025-01-20', '14:00', 'Dor lombar intensa após esforço físico no trabalho',        'ATIVIDADE_FISICA', 8),
-('2025-02-03', '08:30', 'Tosse persistente há duas semanas, febre baixa',            'REMEDIO',          2),
-('2025-02-10', '11:00', 'Crises de pânico recorrentes e estresse ocupacional',       'ATIVIDADE_MENTAL', 6),
-('2025-02-18', '15:30', 'Lesão ligamentar no joelho direito após queda',             'ATIVIDADE_FISICA', 9),
-('2025-03-05', '09:30', 'Hipertensão arterial — pressão elevada em repouso',         'REMEDIO',          3),
-('2025-03-12', '13:00', 'Depressão leve, baixa autoestima e isolamento social',      'ATIVIDADE_MENTAL', 7),
-('2025-03-20', '16:00', 'Dor crônica no ombro esquerdo com limitação de movimento',  'ATIVIDADE_FISICA', 10),
-('2025-04-02', '10:00', 'Diabetes tipo 2 — controle glicêmico insatisfatório',       'REMEDIO',          4),
-('2025-04-15', '09:00', 'Fobia social com evitação de situações públicas',           'ATIVIDADE_MENTAL', 5),
-('2025-04-22', '14:30', 'Tendinite no tornozelo direito, dor ao caminhar',           'ATIVIDADE_FISICA', 8),
-('2025-05-08', '11:30', 'Gripe com inflamação na garganta e dor de ouvido',          'REMEDIO',          1),
-('2025-05-19', '10:00', 'Síndrome de burnout, exaustão emocional severa',            'ATIVIDADE_MENTAL', 6),
-('2025-05-28', '15:00', 'Reabilitação pós-cirurgia de prótese no quadril esquerdo',  'ATIVIDADE_FISICA', 9);
+INSERT INTO atendimento (data, horario, problema_texto, receita_saude, profissional_id, paciente_id) VALUES
+('2025-01-10', '09:00', 'Dor de cabeça frequente e tontura ao se levantar',         'REMEDIO',          1,  1),
+('2025-01-15', '10:30', 'Ansiedade generalizada e dificuldade para dormir',          'ATIVIDADE_MENTAL', 5,  2),
+('2025-01-20', '14:00', 'Dor lombar intensa após esforço físico no trabalho',        'ATIVIDADE_FISICA', 8,  3),
+('2025-02-03', '08:30', 'Tosse persistente há duas semanas, febre baixa',            'REMEDIO',          2,  1),
+('2025-02-10', '11:00', 'Crises de pânico recorrentes e estresse ocupacional',       'ATIVIDADE_MENTAL', 6,  4),
+('2025-02-18', '15:30', 'Lesão ligamentar no joelho direito após queda',             'ATIVIDADE_FISICA', 9,  5),
+('2025-03-05', '09:30', 'Hipertensão arterial — pressão elevada em repouso',         'REMEDIO',          3,  6),
+('2025-03-12', '13:00', 'Depressão leve, baixa autoestima e isolamento social',      'ATIVIDADE_MENTAL', 7,  2),
+('2025-03-20', '16:00', 'Dor crônica no ombro esquerdo com limitação de movimento',  'ATIVIDADE_FISICA', 10, 7),
+('2025-04-02', '10:00', 'Diabetes tipo 2 — controle glicêmico insatisfatório',       'REMEDIO',          4,  8),
+('2025-04-15', '09:00', 'Fobia social com evitação de situações públicas',           'ATIVIDADE_MENTAL', 5,  4),
+('2025-04-22', '14:30', 'Tendinite no tornozelo direito, dor ao caminhar',           'ATIVIDADE_FISICA', 8,  3),
+('2025-05-08', '11:30', 'Gripe com inflamação na garganta e dor de ouvido',          'REMEDIO',          1,  1),
+('2025-05-19', '10:00', 'Síndrome de burnout, exaustão emocional severa',            'ATIVIDADE_MENTAL', 6,  6),
+('2025-05-28', '15:00', 'Reabilitação pós-cirurgia de prótese no quadril esquerdo',  'ATIVIDADE_FISICA', 9,  5);
 
 -- Exames por atendimento
 -- Atendimento 1 — 2 exames
