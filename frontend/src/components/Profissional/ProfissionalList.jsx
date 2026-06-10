@@ -9,6 +9,7 @@ export default function ProfissionalList() {
   const [profissionais, setProfissionais] = useState([])
   const [busca, setBusca] = useState('')
   const [selecionado, setSelecionado] = useState(null)
+  const [erro, setErro] = useState(null)
 
   useEffect(() => {
     profissionalService.listar().then(res => setProfissionais(res.data))
@@ -39,10 +40,17 @@ export default function ProfissionalList() {
 
   const excluir = (id) => {
     if (!window.confirm('Excluir este profissional?')) return
-    profissionalService.excluir(id).then(() => {
-      setProfissionais(prev => prev.filter(p => p.id !== id))
-      if (selecionado?.id === id) setSelecionado(null)
-    })
+    profissionalService.excluir(id)
+      .then(() => {
+        setProfissionais(prev => prev.filter(p => p.id !== id))
+        if (selecionado?.id === id) setSelecionado(null)
+        setErro(null)
+      })
+      .catch(err => {
+        if (err.response?.status === 409) {
+          setErro('Este profissional possui atendimentos vinculados e não pode ser excluído.')
+        }
+      })
   }
 
   const selecionar = (p) => {
@@ -57,6 +65,13 @@ export default function ProfissionalList() {
           + Novo Profissional
         </Link>
       </div>
+
+      {erro && (
+        <div className="alert alert-warning alert-dismissible mb-3" role="alert">
+          {erro}
+          <button type="button" className="btn-close" onClick={() => setErro(null)} />
+        </div>
+      )}
 
       <div className="input-group mb-3" style={{ maxWidth: '420px' }}>
         <input

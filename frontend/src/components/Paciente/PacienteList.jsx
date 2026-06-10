@@ -10,6 +10,7 @@ export default function PacienteList() {
   const [pacientes, setPacientes] = useState([])
   const [busca, setBusca] = useState('')
   const [selecionado, setSelecionado] = useState(null)
+  const [erro, setErro] = useState(null)
 
   useEffect(() => {
     pacienteService.listar().then(res => setPacientes(res.data))
@@ -40,10 +41,17 @@ export default function PacienteList() {
 
   const excluir = (id) => {
     if (!window.confirm('Excluir este paciente?')) return
-    pacienteService.excluir(id).then(() => {
-      setPacientes(prev => prev.filter(p => p.id !== id))
-      if (selecionado?.id === id) setSelecionado(null)
-    })
+    pacienteService.excluir(id)
+      .then(() => {
+        setPacientes(prev => prev.filter(p => p.id !== id))
+        if (selecionado?.id === id) setSelecionado(null)
+        setErro(null)
+      })
+      .catch(err => {
+        if (err.response?.status === 409) {
+          setErro('Este paciente possui atendimentos vinculados e não pode ser excluído.')
+        }
+      })
   }
 
   const selecionar = (p) => {
@@ -58,6 +66,13 @@ export default function PacienteList() {
           + Novo Paciente
         </Link>
       </div>
+
+      {erro && (
+        <div className="alert alert-warning alert-dismissible mb-3" role="alert">
+          {erro}
+          <button type="button" className="btn-close" onClick={() => setErro(null)} />
+        </div>
+      )}
 
       <div className="input-group mb-3" style={{ maxWidth: '420px' }}>
         <input

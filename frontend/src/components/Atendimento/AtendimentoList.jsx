@@ -95,7 +95,7 @@ export default function AtendimentoList() {
                     <th>Data</th>
                     <th>Horário</th>
                     <th>Profissional</th>
-                    <th>Receita</th>
+                    <th>Paciente</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -117,11 +117,7 @@ export default function AtendimentoList() {
                       <td>{formatarData(a.data)}</td>
                       <td>{a.horario}</td>
                       <td>{a.profissional?.nome || '—'}</td>
-                      <td>
-                        <span className={`badge bg-${receitaBadge[a.receitaSaude] || 'secondary'}`}>
-                          {receitaLabel[a.receitaSaude] || a.receitaSaude}
-                        </span>
-                      </td>
+                      <td>{a.paciente?.nome || '—'}</td>
                     </tr>
                   ))}
                 </tbody>

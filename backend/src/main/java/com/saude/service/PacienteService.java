@@ -1,8 +1,11 @@
 package com.saude.service;
 
 import com.saude.model.Paciente;
+import com.saude.repository.AtendimentoRepository;
 import com.saude.repository.PacienteRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,9 +13,12 @@ import java.util.Optional;
 public class PacienteService {
 
     private final PacienteRepository repository;
+    private final AtendimentoRepository atendimentoRepository;
 
-    public PacienteService(PacienteRepository repository) {
+    public PacienteService(PacienteRepository repository,
+                            AtendimentoRepository atendimentoRepository) {
         this.repository = repository;
+        this.atendimentoRepository = atendimentoRepository;
     }
 
     public Paciente inserir(Paciente paciente) {
@@ -43,6 +49,10 @@ public class PacienteService {
 
     public boolean excluir(Integer id) {
         if (!repository.existsById(id)) return false;
+        if (!atendimentoRepository.findByPacienteId(id).isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                "Este paciente possui atendimentos vinculados e não pode ser excluído.");
+        }
         repository.deleteById(id);
         return true;
     }

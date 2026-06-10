@@ -2,8 +2,11 @@ package com.saude.service;
 
 import com.saude.model.CategoriaProfissional;
 import com.saude.model.ProfissionalDeSaude;
+import com.saude.repository.AtendimentoRepository;
 import com.saude.repository.ProfissionalRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,9 +14,12 @@ import java.util.Optional;
 public class ProfissionalService {
 
     private final ProfissionalRepository repository;
+    private final AtendimentoRepository atendimentoRepository;
 
-    public ProfissionalService(ProfissionalRepository repository) {
+    public ProfissionalService(ProfissionalRepository repository,
+                                AtendimentoRepository atendimentoRepository) {
         this.repository = repository;
+        this.atendimentoRepository = atendimentoRepository;
     }
 
     public ProfissionalDeSaude inserir(ProfissionalDeSaude profissional) {
@@ -48,6 +54,10 @@ public class ProfissionalService {
 
     public boolean excluir(Integer id) {
         if (!repository.existsById(id)) return false;
+        if (!atendimentoRepository.findByProfissionalId(id).isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                "Este profissional possui atendimentos vinculados e não pode ser excluído.");
+        }
         repository.deleteById(id);
         return true;
     }
