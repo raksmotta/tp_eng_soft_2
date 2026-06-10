@@ -25,20 +25,92 @@ export default function AtendimentoForm() {
   }
 
   return (
-    <form onSubmit={salvar}>
-      <h2>{id ? 'Editar' : 'Novo'} Atendimento</h2>
-      <input type="date" value={form.data} onChange={e => setForm({ ...form, data: e.target.value })} required />
-      <input type="time" value={form.horario} onChange={e => setForm({ ...form, horario: e.target.value })} required />
-      <textarea placeholder="Problema" value={form.problemaTexto} onChange={e => setForm({ ...form, problemaTexto: e.target.value })} />
-      <select value={form.receitaSaude} onChange={e => setForm({ ...form, receitaSaude: e.target.value })} required>
-        <option value="">Receita</option>
-        {RECEITAS.map(r => <option key={r} value={r}>{r}</option>)}
-      </select>
-      <select value={form.profissional?.id || ''} onChange={e => setForm({ ...form, profissional: { id: e.target.value } })} required>
-        <option value="">Profissional</option>
-        {profissionais.map(p => <option key={p.id} value={p.id}>{p.nome}</option>)}
-      </select>
-      <button type="submit">Salvar</button>
-    </form>
+    <div className="row justify-content-center">
+      <div className="col-md-7">
+        <div className="card shadow-sm">
+          <div className="card-header">
+            <h5 className="mb-0">{id ? 'Editar' : 'Novo'} Atendimento</h5>
+          </div>
+          <div className="card-body">
+            <form onSubmit={salvar}>
+              <div className="row mb-3">
+                <div className="col">
+                  <label className="form-label">Data *</label>
+                  <input
+                    type="date"
+                    className="form-control"
+                    value={form.data}
+                    onChange={e => setForm({ ...form, data: e.target.value })}
+                    required
+                  />
+                </div>
+                <div className="col">
+                  <label className="form-label">Horário *</label>
+                  <input
+                    type="time"
+                    className="form-control"
+                    value={form.horario}
+                    onChange={e => setForm({ ...form, horario: e.target.value })}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label">Profissional *</label>
+                <select
+                  className="form-select"
+                  value={form.profissional?.id || ''}
+                  onChange={e => setForm({ ...form, profissional: { id: e.target.value } })}
+                  required
+                >
+                  <option value="">Selecione...</option>
+                  {profissionais.map(p => (
+                    <option key={p.id} value={p.id}>{p.nome} — {p.categoria}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label">Descrição do Problema</label>
+                <textarea
+                  className="form-control"
+                  rows={3}
+                  placeholder="Descreva o problema relatado pelo paciente"
+                  value={form.problemaTexto}
+                  onChange={e => setForm({ ...form, problemaTexto: e.target.value })}
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="form-label">Receita *</label>
+                <select
+                  className="form-select"
+                  value={form.receitaSaude}
+                  onChange={e => setForm({ ...form, receitaSaude: e.target.value })}
+                  required
+                >
+                  <option value="">Selecione...</option>
+                  {RECEITAS.map(r => <option key={r} value={r}>{r}</option>)}
+                </select>
+              </div>
+
+              <div className="d-flex gap-2 justify-content-end">
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary"
+                  onClick={() => navigate('/atendimentos')}
+                >
+                  Cancelar
+                </button>
+                <button type="submit" className="btn btn-primary">
+                  Salvar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }

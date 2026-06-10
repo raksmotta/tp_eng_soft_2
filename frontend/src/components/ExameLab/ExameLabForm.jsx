@@ -14,10 +14,41 @@ export default function ExameLabForm() {
   }
 
   return (
-    <form onSubmit={salvar}>
-      <h2>Novo Exame</h2>
-      <input placeholder="Descricao" value={descricao} onChange={e => setDescricao(e.target.value)} required />
-      <button type="submit">Salvar</button>
-    </form>
+    <div className="row justify-content-center">
+      <div className="col-md-5">
+        <div className="card shadow-sm">
+          <div className="card-header">
+            <h5 className="mb-0">Novo Exame — Atendimento #{atendimentoId}</h5>
+          </div>
+          <div className="card-body">
+            <form onSubmit={salvar}>
+              <div className="mb-4">
+                <label className="form-label">Descrição *</label>
+                <input
+                  className="form-control"
+                  placeholder="Ex: Hemograma completo"
+                  value={descricao}
+                  onChange={e => setDescricao(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="d-flex gap-2 justify-content-end">
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary"
+                  onClick={() => navigate(`/atendimentos/${atendimentoId}/exames`)}
+                >
+                  Cancelar
+                </button>
+                <button type="submit" className="btn btn-primary">
+                  Salvar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
