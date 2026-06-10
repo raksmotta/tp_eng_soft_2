@@ -1,0 +1,5 @@
+falta:
+
+- questao de ci/cd com github actions pipeline e testes unitários / de integração
+- questão do docker
+- hospedar na aws
