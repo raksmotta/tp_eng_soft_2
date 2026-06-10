@@ -1,4 +1,5 @@
 # Sistema de Gestão de Atendimentos de Saúde
+# Antônio Drumond e Raquel Motta
 
 Sistema web para gerenciar profissionais de saúde, atendimentos e exames laboratoriais.
 
